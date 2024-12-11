@@ -75,7 +75,7 @@ export namespace Action {
       } else if (keepedCount < 0) {
         stales = items
       } else {
-        items
+        stales = items
           .sort(
             (a, b) =>
               new Date(a.created_at).getTime() -
@@ -84,8 +84,8 @@ export namespace Action {
           .slice(keepedCount)
       }
 
-      for (let i = 0, l = stales!.length; i < l; i += 1) {
-        const release = stales![i]
+      for (let i = 0, l = stales.length; i < l; i += 1) {
+        const release = stales[i]
         if (!dryRun) {
           await octokit.rest.repos.deleteRelease({
             ...context.repo,
